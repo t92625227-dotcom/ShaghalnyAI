@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#4f46e5">
+<title>شغلني AI — Ultimate</title>
+<style>
+:root{--p:#4f46e5;--p2:#7c3aed;--bg:#f5f7fb;--card:#fff;--txt:#172033;--muted:#667085;--line:#e5e7eb;--soft:#eef2ff;--good:#ecfdf3;--bad:#fff1f2}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--txt);font-family:Arial,Tahoma,sans-serif}
+body.dark{--bg:#0f172a;--card:#111827;--txt:#f8fafc;--muted:#a8b0c0;--line:#273449;--soft:#1e293b}
+.app{max-width:560px;margin:auto;min-height:100vh;background:var(--card)}
+.hero{padding:22px 17px 17px;color:#fff;background:linear-gradient(135deg,var(--p),var(--p2),#2563eb);border-radius:0 0 28px 28px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{font-size:28px;font-weight:900}.mini{background:#ffffff20;color:#fff;border:1px solid #ffffff55;border-radius:12px;padding:8px 10px}
+.sub{margin-top:7px;line-height:1.55;opacity:.95}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.stat{background:#ffffff18;border:1px solid #ffffff30;border-radius:14px;padding:9px;text-align:center}.stat b{display:block;font-size:18px}
+.nav{position:sticky;top:0;z-index:5;display:flex;gap:5px;overflow:auto;padding:9px;background:var(--card);border-bottom:1px solid var(--line)}.nav button{white-space:nowrap;border:0;background:transparent;color:var(--muted);padding:9px 11px;border-radius:20px;font-weight:800}.nav .on{background:var(--soft);color:var(--p)}
+main{padding:13px}.page{display:none}.page.on{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:12px;box-shadow:0 5px 18px #00000008}
+h2{font-size:21px;margin:0 0 12px}h3{margin:15px 0 7px}label{font-weight:800;display:block;margin:10px 0 6px}
+input,textarea,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--txt);font-size:16px}textarea{min-height:92px;resize:vertical}
+button{font-size:15px;font-weight:800;border:0;border-radius:12px;padding:11px 13px;cursor:pointer}.primary{width:100%;background:var(--p);color:#fff;margin-top:12px}.secondary{background:var(--soft);color:var(--p);margin:4px}.good{background:var(--good);color:#047857}.danger{background:var(--bad);color:#be123c}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.box{background:var(--bg);border-radius:13px;padding:12px;line-height:1.8;white-space:pre-line}.muted{color:var(--muted);font-size:13px;line-height:1.65}.tag{display:inline-block;background:var(--soft);color:var(--p);padding:5px 9px;border-radius:20px;margin:3px;font-size:12px}.item{border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:9px}.item b{display:block;margin-bottom:4px}.toast{display:none;padding:10px;border-radius:10px;background:var(--good);color:#047857;margin-top:8px}.bar{height:9px;background:var(--line);border-radius:10px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--p2));width:0}.score{font-size:34px;font-weight:900;color:var(--p)}.footer{text-align:center;color:var(--muted);padding:20px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+ <div class="top"><div class="brand">شغلني AI 🤖</div><div><button class="mini" onclick="toggleTheme()">◐</button></div></div>
+ <div class="sub" id="subtitle">مساعدك الذكي للوظائف، الـCV، خطابات التقديم والمقابلات.</div>
+ <div class="stats"><div class="stat"><b id="profileStat">0%</b><span>اكتمال الملف</span></div><div class="stat"><b id="appsStat">0</b><span>تقديمات</span></div><div class="stat"><b id="skillsStat">0</b><span>مهارات</span></div></div>
+</header>
+
+<nav class="nav">
+<button class="on" onclick="go('profile',this)">👤 ملفي</button>
+<button onclick="go('cv',this)">📄 CV</button>
+<button onclick="go('cover',this)">✉️ تقديم</button>
+<button onclick="go('interview',this)">🎤 مقابلة</button>
+<button onclick="go('jobs',this)">💼 التقديمات</button>
+<button onclick="go('tools',this)">🧰 أدوات</button>
+</nav>
+
+<main>
+<section id="profile" class="page on">
+<div class="card">
+<h2>👤 ملفك المهني</h2>
+<div class="grid2"><div><label>الاسم</label><input id="name" placeholder="أحمد محمد"></div><div><label>المدينة / الدولة</label><input id="location" placeholder="القاهرة، مصر"></div></div>
+<label>الوظيفة المستهدفة</label><input id="target" placeholder="مثال: خدمة عملاء / Software Engineer">
+<label>التعليم</label><input id="education" placeholder="الجامعة، التخصص، سنة التخرج">
+<label>الخبرة</label><textarea id="experience" placeholder="اكتب خبراتك أو التدريب أو المشاريع..."></textarea>
+<label>المهارات</label><textarea id="skills" placeholder="Excel، مبيعات، برمجة، خدمة عملاء..."></textarea>
+<label>اللغات ومستواها</label><input id="languages" placeholder="العربية C2، الإنجليزية B1...">
+<label>نبذة عنك</label><textarea id="about" placeholder="من أنت؟ ماذا تستطيع أن تقدم؟"></textarea>
+<label>لغة النتائج</label>
+<select id="outLang"><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="tr">Türkçe</option><option value="pt">Português</option><option value="it">Italiano</option><option value="ru">Русский</option><option value="hi">हिन्दी</option><option value="zh">中文</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="id">Bahasa Indonesia</option><option value="ur">اردو</option><option value="bn">বাংলা</option></select>
+<button class="primary" onclick="generate()">✨ حلّل ملفي وجهزني للتقديم</button>
+<div id="toast" class="toast">تم حفظ وتحليل ملفك.</div>
+</div>
+
+<div class="card">
+<h2>🌍 لغات التطبيق</h2>
+<div id="langs"></div>
+<div class="muted">الواجهة والنتائج مصممة لتدعم أسواقًا متعددة. الترجمة الآلية الاحترافية والـAI السحابي تُوصل في نسخة الإنتاج.</div>
+</div>
+</section>
+
+<section id="cv" class="page">
+<div class="card"><h2>📄 منشئ السيرة الذاتية</h2>
+<div class="muted">يتم بناء مسودة CV من بياناتك. اختر قالبًا ثم احفظه PDF من نافذة الطباعة.</div>
+<select id="template"><option>احترافي بسيط</option><option>حديث</option><option>مناسب للـATS</option></select>
+<div id="cvOut" class="box" style="margin-top:10px">أكمل ملفك واضغط التحليل أولًا.</div>
+<button class="secondary" onclick="copy('cvOut')">📋 نسخ</button><button class="secondary" onclick="printDoc('cvOut','CV')">📥 حفظ PDF</button>
+</div>
+<div class="card"><h2>📊 فحص الـCV</h2><div class="score" id="cvScore">—</div><div class="bar"><i id="scoreBar"></i></div><div id="cvAdvice" class="muted" style="margin-top:8px"></div></div>
+</section>
+
+<section id="cover" class="page">
+<div class="card"><h2>✉️ خطاب التقديم</h2><label>اسم الشركة</label><input id="company" placeholder="اسم الشركة"><label>تفاصيل الوظيفة</label><textarea id="jobDetails" placeholder="انسخ وصف الوظيفة هنا..."></textarea><button class="primary" onclick="makeCover()">✨ أنشئ خطابًا مخصصًا</button><div id="coverOut" class="box" style="margin-top:10px;display:none"></div><button class="secondary" onclick="copy('coverOut')">📋 نسخ</button></div>
+</section>
+
+<section id="interview" class="page">
+<div class="card"><h2>🎤 مدرب المقابلة</h2><label>نوع المقابلة</label><select id="interviewType"><option>مقابلة عامة</option><option>خدمة عملاء / كول سنتر</option><option>مبيعات</option><option>تقنية / برمجة</option><option>إدارية</option></select><button class="primary" onclick="startInterview()">ابدأ التدريب</button><div id="questions"></div></div>
+</section>
+
+<section id="jobs" class="page">
+<div class="card"><h2>💼 متابع التقديمات</h2><div class="grid2"><div><label>الشركة</label><input id="jc"></div><div><label>الوظيفة</label><input id="jj"></div></div><label>الرابط</label><input id="ju" placeholder="اختياري"><label>الحالة</label><select id="js"><option>قدمت</option><option>مقابلة</option><option>اختبار</option><option>انتظار رد</option><option>عرض عمل</option><option>مرفوض</option></select><button class="primary" onclick="addApp()">➕ حفظ التقديم</button><div id="apps"></div></div>
+</section>
+
+<section id="tools" class="page">
+<div class="card"><h2>🧰 أدوات سريعة</h2>
+<div class="grid2"><button class="secondary" onclick="calcSalary()">💰 حاسبة الراتب</button><button class="secondary" onclick="keywords()">🔎 كلمات CV</button><button class="secondary" onclick="translateHint()">🌍 ترجمة مساعدة</button><button class="secondary" onclick="clearData()">🗑️ مسح بياناتي</button></div>
+<div id="toolOut" class="box" style="margin-top:10px;display:none"></div>
+</div>
+<div class="card"><h2>🔐 الخصوصية</h2><div class="muted">هذا النموذج يحفظ بياناتك محليًا في المتصفح. لا توجد في هذه النسخة قاعدة بيانات أو إرسال تلقائي إلى خادم.</div></div>
+<div class="card"><h2>💎 نموذج الربح المستقبلي</h2><div class="muted">نسخة مجانية: أدوات أساسية + إعلانات مناسبة. نسخة مدفوعة اختيارية: بدون إعلانات + قوالب متقدمة + ميزات AI موسعة. لن نضع إعلانات مزعجة داخل خطوات كتابة الـCV.</div></div>
+</section>
+</main>
+<div class="footer">Shaghalny AI — Ultimate Prototype • جاهز للانتقال إلى تطبيق Android إنتاجي</div>
+</div>
+
+<script>
+const languageNames=["العربية","English","Français","Español","Deutsch","Türkçe","Português","Italiano","Русский","हिन्दी","中文","日本語","한국어","Bahasa Indonesia","اردو","বাংলা","Nederlands","Polski","فارسی","ไทย"];
+document.getElementById('langs').innerHTML=languageNames.map(x=>`<span class="tag">${x}</span>`).join('');
+
+function go(id,b){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));document.getElementById(id).classList.add('on');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');if(id==='jobs')renderApps();updateStats()}
+function v(id){return document.getElementById(id).value.trim()}
+function profile(){return {name:v('name'),location:v('location'),target:v('target'),education:v('education'),experience:v('experience'),skills:v('skills'),languages:v('languages'),about:v('about'),outLang:v('outLang')}}
+function generate(){
+ const p=profile(); localStorage.setItem('profile',JSON.stringify(p));
+ const skillCount=p.skills? p.skills.split(/[,،\n]/).map(x=>x.trim()).filter(Boolean).length:0;
+ const text=`${p.name||'اسم المتقدم'}\n${p.target||'الوظيفة المستهدفة'}\n${p.location||''}\n\nالملخص المهني\n${p.about||'مرشح متحمس يبحث عن فرصة مناسبة ويستعد لتطوير مهاراته باستمرار.'}\n\nالتعليم\n${p.education||'—'}\n\nالخبرة والمشاريع\n${p.experience||'—'}\n\nالمهارات\n${p.skills||'—'}\n\nاللغات\n${p.languages||'—'}`;
+ document.getElementById('cvOut').textContent=text;
+ let score=35;if(p.name)score+=10;if(p.target)score+=15;if(p.education)score+=10;if(p.experience)score+=10;if(p.skills)score+=10;if(p.languages)score+=5;if(p.about)score+=5;score=Math.min(100,score);
+ document.getElementById('cvScore').textContent=score+'/100';document.getElementById('scoreBar').style.width=score+'%';
+ document.getElementById('cvAdvice').textContent=score<70?'أضف خبرات/مشاريع، مهارات محددة، ونتائج قابلة للقياس لتحسين الملف.':'ملف جيد كبداية. في نسخة الإنتاج سيحلل AI الوصف الوظيفي ويقترح تعديلات ATS مخصصة.';
+ document.getElementById('toast').style.display='block';setTimeout(()=>document.getElementById('toast').style.display='none',1800);updateStats();
+}
+function makeCover(){
+ const p=JSON.parse(localStorage.getItem('profile')||'null')||profile();const c=v('company')||'الشركة';const d=v('jobDetails')||p.target||'الوظيفة';
+ const t=`مرحبًا فريق ${c}،\n\nأتقدم باهتمام إلى فرصة ${p.target||'الوظيفة'} لديكم. بناءً على خبرتي ومهاراتي في ${p.skills||'مجالات متنوعة'}، أرى أن خلفيتي يمكن أن تكون مناسبة لمتطلبات الدور.\n\n${d.slice(0,500)}\n\nيسعدني مناقشة خبرتي بشكل أكبر في مقابلة. شكرًا لوقتكم واهتمامكم.\n\nمع التحية،\n${p.name||'المتقدم'}`;
+ const o=document.getElementById('coverOut');o.style.display='block';o.textContent=t;
+}
+function startInterview(){
+ const p=JSON.parse(localStorage.getItem('profile')||'null')||profile();const type=v('interviewType');
+ const qs=[`عرّف نفسك في دقيقة بما يناسب وظيفة ${p.target||'الوظيفة'}.`,`لماذا اخترت مجال ${type}؟`,`ما أقوى مهارة لديك؟ أعطِ مثالًا عمليًا.`,`اذكر موقفًا واجهت فيه مشكلة وكيف حللتها.`,`لماذا تريد العمل معنا؟`,`ما المهارة التي تعمل على تطويرها حاليًا؟`];
+ document.getElementById('questions').innerHTML=qs.map((q,i)=>`<div class="item"><b>${i+1}. ${q}</b><textarea placeholder="اكتب إجابتك ثم راجع: هل كانت واضحة؟ هل أعطيت مثالًا؟"></textarea></div>`).join('');
+}
+function addApp(){let a=JSON.parse(localStorage.getItem('apps')||'[]');a.unshift({c:v('jc'),j:v('jj'),u:v('ju'),s:v('js'),d:new Date().toLocaleDateString()});localStorage.setItem('apps',JSON.stringify(a));document.getElementById('jc').value='';document.getElementById('jj').value='';document.getElementById('ju').value='';renderApps();updateStats()}
+function renderApps(){let a=JSON.parse(localStorage.getItem('apps')||'[]');document.getElementById('apps').innerHTML=a.map((x,i)=>`<div class="item"><b>${x.j||'وظيفة'}</b>${x.c||''}<br><span class="tag">${x.s}</span> <span class="muted">${x.d}</span><br>${x.u?`<a href="${x.u}" target="_blank">فتح الرابط</a>`:''} <button class="danger" onclick="delApp(${i})">حذف</button></div>`).join('')||'<div class="muted">لم تضف تقديمات بعد.</div>'}
+function delApp(i){let a=JSON.parse(localStorage.getItem('apps')||'[]');a.splice(i,1);localStorage.setItem('apps',JSON.stringify(a));renderApps();updateStats()}
+function updateStats(){let p=JSON.parse(localStorage.getItem('profile')||'{}'),a=JSON.parse(localStorage.getItem('apps')||'[]');let fields=['name','location','target','education','experience','skills','languages','about'];let n=fields.filter(k=>p[k]).length;document.getElementById('profileStat').textContent=Math.round(n/fields.length*100)+'%';document.getElementById('appsStat').textContent=a.length;document.getElementById('skillsStat').textContent=p.skills?p.skills.split(/[,،\n]/).filter(x=>x.trim()).length:0}
+function copy(id){navigator.clipboard?.writeText(document.getElementById(id).textContent);alert('تم النسخ')}
+function printDoc(id,title){let w=window.open('','_blank');w.document.write(`<html><head><title>${title}</title></head><body style="font-family:Arial;direction:${document.documentElement.dir};padding:35px"><pre style="white-space:pre-wrap;font-size:16px;line-height:1.9">${document.getElementById(id).textContent}</pre></body></html>`);w.print()}
+function calcSalary(){let x=prompt('اكتب الراتب الشهري الأساسي:');let y=prompt('عدد أيام العمل بالشهر (مثال 26):');if(x&&y){let d=Number(x)/Number(y);tool(`الراتب اليومي التقريبي: ${d.toFixed(2)}\nالراتب الأسبوعي التقريبي: ${(Number(x)/4.33).toFixed(2)}`)}}
+function keywords(){let p=JSON.parse(localStorage.getItem('profile')||'{}');tool('كلمات مهمة: '+(p.skills||'أضف مهاراتك أولًا')+'\n\nفي النسخة الإنتاجية سنقارن هذه الكلمات بوصف الوظيفة ونقترح كلمات ATS مناسبة.')}
+function translateHint(){tool('اكتب النص المطلوب ترجمته في بياناتك، ثم اختر لغة النتائج. في النسخة الإنتاجية سنضيف ترجمة AI كاملة مع الحفاظ على المصطلحات المهنية.')}
+function tool(x){let o=document.getElementById('toolOut');o.style.display='block';o.textContent=x}
+function toggleTheme(){document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark'))}
+function clearData(){if(confirm('مسح كل بيانات التطبيق من هذا الجهاز؟')){localStorage.clear();location.reload()}}
+if(localStorage.getItem('dark')==='true')document.body.classList.add('dark');
+let p=JSON.parse(localStorage.getItem('profile')||'null');if(p)for(const k in p)if(document.getElementById(k))document.getElementById(k).value=p[k]||'';
+if(p){generate()}else updateStats();
+</script>
+</body>
+</html>
